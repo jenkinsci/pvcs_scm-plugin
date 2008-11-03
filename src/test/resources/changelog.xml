@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<changeLog xmlns="urn:changelog.pvcs_scm.plugins.hudson">
+    <entry>
+        <fileName>MYORG-Java/pom.xml</fileName>
+        <revision>1.0</revision>
+        <modifiedTime>2008-09-01T16:34:52</modifiedTime>
+        <comment>test comment</comment>
+        <userName>a430016</userName>
+    </entry>
+</changeLog>

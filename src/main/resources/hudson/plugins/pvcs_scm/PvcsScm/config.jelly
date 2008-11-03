@@ -1,0 +1,38 @@
+<j:jelly xmlns:j="jelly:core"
+         xmlns:st="jelly:stapler"
+         xmlns:d="jelly:define"
+         xmlns:l="/lib/layout"
+         xmlns:t="/lib/hudson"
+         xmlns:f="/lib/form">
+
+    <f:entry title="Project root" help="/plugin/pvcs/project_root.html">
+        <f:textbox name="pvcs.projectRoot" value="${scm.projectRoot}" />
+    </f:entry>
+    
+    <f:entry title="Archive root" help="/plugin/pvcs/archive_root.html">
+        <f:textbox name="pvcs.archiveRoot" value="${scm.archiveRoot}" />
+    </f:entry>
+    
+    <f:entry title="Changelog prefix fudge" help="/plugin/pvcs/changelog_prefix_fudge.html">
+        <f:textbox name="pvcs.changeLogPrefixFudge" value="${scm.changeLogPrefixFudge}" />
+    </f:entry>
+    
+    <f:entry title="Module" help="/plugin/pvcs/module.html">
+        <f:textbox name="pvcs.moduleDir" value="${scm.moduleDir}" />
+    </f:entry>
+    
+    <f:advanced>
+        <f:entry title="Clean copy">
+            <f:checkbox name="pvcs.cleanCopy" checked="${scm.cleanCopy}" />
+
+            If checked, Hudson will delete the directory and all its contents
+            before downloading the files from the repository for every build.
+        </f:entry>
+
+        <f:entry title="Workspace name" help="/plugin/pvcs/workspacename.html">
+            <f:textbox name="pvcs.workspaceName" value="${scm.workspaceName}" />
+        </f:entry>
+
+    </f:advanced>
+</j:jelly>
+

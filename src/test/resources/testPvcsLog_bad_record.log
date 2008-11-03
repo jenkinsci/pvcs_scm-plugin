@@ -1,0 +1,192 @@
+Archive:          //repository/pvcs/repository/MYORG_MAINT/MYORG-Java/aps/.classpath_v
+Workfile:         .classpath
+Archive created:  04 Dec 2007 14:50:22
+Split mode:       Split \\repository\pvcs\repository\MYORG_MAINT\MYORG-Java\aps\.classpath_v
+Owner:            a441621
+Last trunk rev:   1.5
+Locks:            
+Groups:           
+Rev count:        13
+Attributes:
+   WRITEPROTECT
+   CHECKLOCK
+   NOEXCLUSIVELOCK
+   NOEXPANDKEYWORDS
+   NOTRANSLATE
+   NOCOMPRESSDELTA
+   NOCOMPRESSWORKIMAGE
+   NOGENERATEDELTA
+   COMMENTPREFIX = ""
+   NEWLINE = "\r\n"
+Version labels:
+   "REL10" = 1.*
+   "REL10_CHANGES" = 1.5
+   "SIT_120707_REL10" = 1.0
+   "BUILD4_011808_REL10" = 1.3
+   "DIT_012508_REL10" = 1.3
+   "DIT_020808_REL10" = 1.4
+   "DIT_021508_REL10" = 1.4
+   "SIT_040208_REL10" = 1.5
+   "SIT_050808_REL10" = 1.5
+   "FNR_050808_SIT" = 1.5
+   "SIT_051408_REL10" = 1.5
+   "BAT_051508_REL10" = 1.5
+   "SIT_052008_REL10" = 1.5
+   "2008_ETF" = 1.5.2.*
+   "BCK" = 1.5
+   "SIT_052808_REL10" = 1.5
+   "PROD_053008_CANDIDATE" = 1.5
+   "SIT_060808_REL10" = 1.5
+   "SIT_061108_REL10" = 1.5
+   "CONFIG_061208_REL10" = 1.5
+   "SIT_061608_REL10" = 1.5
+   "SIT_061708_REL10" = 1.5
+   "BAT_061808_REL10" = 1.5
+   "BASELINE_052208_2008_09" = 1.5
+   "UAT_062408_REL10" = 1.5
+   "BASELINE_052008_2008_07" = 1.5
+   "2008_ETF_DELETE" = 1.5.2.0
+   "BOBCHECK" = 1.5.2.0
+   "BAT_062508_REL10" = 1.5
+   "PAT_062608_REL10" = 1.5
+   "PROD_CAND_070208_REL10" = 1.5
+   "BASELINE_070808_2008_07" = 1.5
+   "2008_07_DELETE" = 1.5.3.0
+   "2008_07" = 1.5.3.*
+   "2008_07_CHANGES" = 1.5.3.0
+   "REL10_CKC" = 1.5
+   "MYORG_MAINT" = 1.*
+   "07_CK" = 1.5.3.0
+   "BOBCK1" = 1.5.3.0
+   "PROD_CURRENT" = 1.5
+   "BOBCK" = 1.5.4.0
+   "BASELINE_062808_2008_08" = 1.5
+   "2008_08_DELETE" = 1.5.4.0
+   "2008_08" = 1.5.4.*
+   "2008_08_CHANGES" = 1.5.4.0
+   "2008_12" = 1.5.5.*
+   "2008_12_CHANGES" = 1.5.5.0
+   "2008_09_DELETE" = 1.5.6.0
+   "2008_09" = 1.5.6.*
+   "2008_09_CHANGES" = 1.5.6.0
+   "BOB1" = 1.5.6.0
+   "SIT_082808_2008_08" = 1.5.4.0
+   "bobck_2008_08" = 1.5.4.0
+   "BASELINE_082708_2008_10" = 1.5.6.0
+   "2008_10_DELETE" = 1.5.6.0.1.0
+   "2008_10" = 1.5.6.0.1.*
+   "2008_10_CHANGES" = 1.5.6.0.1.0
+   "BASELINE_100208_Platform_maint" = 1.5.4.0
+   "platform_maint_DELETE" = 1.5.4.0.1.0
+   "2008_08_java" = 1.5.4.0
+   "bobckmp" = 1.5.4.0.1.0
+   "BOBCK12" = 1.5.4.0
+   "Platform_maint" = 1.5.4.0.1.*
+   "Platform_maint_CHANGES" = 1.5.4.0.1.0
+Description:
+prelim
+
+-----------------------------------
+Rev 1.5.6.0.1.0
+Checked in:     24 Sep 2008 13:48:52
+Last modified:  20 Feb 2008 11:12:44
+Author id: a273094     lines deleted/added/moved: 0/0/0
+BRANCHED FOR 2008_10 from BASELINE_082708_2008_10
+THIS LINE SHOULD NEVER BE SEEN; FORCING A TEST CASE.
+
+Archive:          //repository/pvcs/repository/MYORG_MAINT/MYORG-Java/aps/.project_v
+Workfile:         .project
+Archive created:  04 Dec 2007 14:50:22
+Split mode:       Split \\repository\pvcs\repository\MYORG_MAINT\MYORG-Java\aps\.project_v
+Owner:            a441621
+Last trunk rev:   1.3
+Locks:            
+Groups:           
+Rev count:        13
+Attributes:
+   WRITEPROTECT
+   CHECKLOCK
+   NOEXCLUSIVELOCK
+   NOEXPANDKEYWORDS
+   NOTRANSLATE
+   NOCOMPRESSDELTA
+   NOCOMPRESSWORKIMAGE
+   NOGENERATEDELTA
+   COMMENTPREFIX = ""
+   NEWLINE = "\r\n"
+Version labels:
+   "REL10" = 1.*
+   "REL10_CHANGES" = 1.2
+   "SIT_120707_REL10" = 1.0
+   "BUILD4_011808_REL10" = 1.2
+   "DIT_012508_REL10" = 1.2
+   "DIT_020808_REL10" = 1.2
+   "DIT_021508_REL10" = 1.2
+   "SIT_040208_REL10" = 1.2
+   "SIT_050808_REL10" = 1.2
+   "FNR_050808_SIT" = 1.2
+   "SIT_051408_REL10" = 1.2
+   "BAT_051508_REL10" = 1.2
+   "SIT_052008_REL10" = 1.2
+   "2008_ETF" = 1.2.2.*
+   "BCK" = 1.2
+   "SIT_052808_REL10" = 1.2
+   "PROD_053008_CANDIDATE" = 1.2
+   "SIT_060808_REL10" = 1.2
+   "SIT_061108_REL10" = 1.2
+   "CONFIG_061208_REL10" = 1.2
+   "SIT_061608_REL10" = 1.2
+   "SIT_061708_REL10" = 1.2
+   "BAT_061808_REL10" = 1.2
+   "BASELINE_052208_2008_09" = 1.2
+   "UAT_062408_REL10" = 1.2
+   "BASELINE_052008_2008_07" = 1.2
+   "2008_ETF_DELETE" = 1.2.2.0
+   "BOBCHECK" = 1.2.2.0
+   "BAT_062508_REL10" = 1.2
+   "PAT_062608_REL10" = 1.2
+   "PROD_CAND_070208_REL10" = 1.2
+   "BASELINE_070808_2008_07" = 1.2
+   "2008_07_DELETE" = 1.2.3.0
+   "2008_07" = 1.2.3.*
+   "2008_07_CHANGES" = 1.2.3.0
+   "REL10_CKC" = 1.2
+   "MYORG_MAINT" = 1.*
+   "07_CK" = 1.2.3.0
+   "BOBCK1" = 1.2.3.0
+   "PROD_CURRENT" = 1.3
+   "BOBCK" = 1.2.4.1
+   "BASELINE_062808_2008_08" = 1.2
+   "2008_08_DELETE" = 1.2.4.0
+   "2008_08" = 1.2.4.*
+   "2008_08_CHANGES" = 1.2.4.1
+   "2008_12" = 1.2.5.*
+   "2008_12_CHANGES" = 1.2.5.1
+   "2008_09" = 1.2.5.1.1.*
+   "2008_09_CHANGES" = 1.2.5.1.1.0
+   "SIT_082808_2008_08" = 1.2.4.1
+   "bobck_2008_08" = 1.2.4.1
+   "1891461" = 1.2.4.1
+   "1891461_WRAP" = 1.2.4.1
+   "MYORG_MAINT_CHANGES" = 1.3
+   "BASELINE_082708_2008_10" = 1.2.5.1.1.0
+   "2008_10_DELETE" = 1.2.5.1.1.0.1.0
+   "2008_10" = 1.2.5.1.1.0.1.*
+   "2008_10_CHANGES" = 1.2.5.1.1.0.1.0
+   "BASELINE_100208_Platform_maint" = 1.2.4.1
+   "platform_maint_DELETE" = 1.2.4.1.1.0
+   "2008_08_java" = 1.2.4.1
+   "bobckmp" = 1.2.4.1.1.0
+   "BOBCK12" = 1.2.4.1
+   "Platform_maint" = 1.2.4.1.1.*
+   "Platform_maint_CHANGES" = 1.2.4.1.1.0
+Description:
+prelim
+
+-----------------------------------
+Rev 1.2.5.1.1.0.1.0
+Checked in:     24 Sep 2008 13:48:52
+Last modified:  06 Aug 2008 14:48:16
+Author id: a273094     lines deleted/added/moved: 0/0/0
+BRANCHED FOR 2008_10 from BASELINE_082708_2008_10
+===================================

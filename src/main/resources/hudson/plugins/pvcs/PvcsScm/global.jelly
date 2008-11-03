@@ -1,0 +1,18 @@
+<j:jelly xmlns:j="jelly:core"
+         xmlns:st="jelly:stapler"
+         xmlns:d="jelly:define"
+         xmlns:l="/lib/layout"
+         xmlns:t="/lib/hudson"
+         xmlns:f="/lib/form">
+
+    <f:section title="PVCS">
+        <f:entry title="PVCS command line executable (pcli)" 
+                 help="/plugin/pvcs/executable.html">
+
+            <f:textbox name="pvcs.executable"
+                       value="${descriptor.executable}"
+                       checkUrl="'${rootURL}/scm/PvcsScm/executableCheck?value='+escape(this.value)" />
+        </f:entry>
+    </f:section>
+</j:jelly>
+

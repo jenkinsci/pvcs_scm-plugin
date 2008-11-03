@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:cl="urn:changelog.pvcs_scm.plugins.hudson"
+            targetNamespace="urn:changelog.pvcs_scm.plugins.hudson"
+            elementFormDefault="qualified"
+            xml:lang="en">
+
+    <xsd:element name="changeLog" type="cl:PvcsChangeLogSet" />
+
+    <xsd:complexType name="PvcsChangeLogSet">
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="entry" type="cl:PvcsChangeLogEntry" />
+        </xsd:sequence>
+
+        <xsd:attribute name="buildId" type="xsd:token" />
+        <xsd:attribute name="lastBuildId" type="xsd:token" />
+        <xsd:attribute name="lastBuildTime" type="xsd:dateTime" />
+    </xsd:complexType>
+
+    <xsd:complexType name="PvcsChangeLogEntry">
+        <xsd:sequence>
+            <xsd:element name="fileName" type="xsd:string"/>
+            <xsd:element name="revision" type="xsd:string"/>
+            <xsd:element name="modifiedTime" type="xsd:dateTime"/>
+            <xsd:element name="comment" type="xsd:string" />
+            <xsd:element name="userName" type="xsd:token" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

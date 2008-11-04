@@ -14,14 +14,18 @@ import java.text.SimpleDateFormat;
 import org.xml.sax.SAXException;
 import org.apache.xmlbeans.XmlException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
- * >>INSERT CLASS OVERVIEW HERE<<
+ * Encapsulates the file format of the changelog.
  *
  * @author Brian Lalor &lt;blalor@bravo5.org&gt;
  */
 public class PvcsChangeLogParser extends ChangeLogParser
 {
-
+    private Log logger = LogFactory.getLog(getClass());
+    
     // {{{ parse
     /**
      * {@inheritDoc}
@@ -33,6 +37,8 @@ public class PvcsChangeLogParser extends ChangeLogParser
     {
         PvcsChangeLogSet clSet = null;
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        
+        logger.debug("parsing " + changelogFile);
         
         try {
             ChangeLogDocument doc = ChangeLogDocument.Factory.parse(changelogFile);
@@ -52,6 +58,7 @@ public class PvcsChangeLogParser extends ChangeLogParser
             }
         } catch (XmlException e) {
             // @todo
+            logger.error(String.format("Unable to parse %s: %s", changelogFile, e.getMessage()), e);
             throw new SAXException(e);
         }
     

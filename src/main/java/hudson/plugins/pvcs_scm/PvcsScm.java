@@ -86,6 +86,8 @@ public class PvcsScm extends SCM
         this.changeLogPrefixFudge = changeLogPrefixFudge;
         this.moduleDir = moduleDir;
         this.cleanCopy = cleanCopy;
+
+        logger.debug("created new instance");
     }
     // }}}
 
@@ -159,7 +161,6 @@ public class PvcsScm extends SCM
     }
     // }}}
     
-    
     // {{{ checkout
     /**
      * {@inheritDoc}
@@ -172,6 +173,8 @@ public class PvcsScm extends SCM
                             final File changelogFile)
         throws IOException, InterruptedException
     {
+        logger.trace("in checkout()");
+        
         boolean checkoutSucceeded = true;
 
         ChangeLogDocument doc = ChangeLogDocument.Factory.newInstance();
@@ -194,6 +197,8 @@ public class PvcsScm extends SCM
         if (cleanCopy) {
             listener.getLogger().println("clean copy configured; deleting contents of " + workspace);
 
+            logger.info("deleting contents of workspace " + workspace);
+            
             workspace.deleteContents();
         }
 
@@ -209,17 +214,25 @@ public class PvcsScm extends SCM
         cmd.add(moduleDir);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        logger.debug("launching command " + cmd);
+        
         Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], baos, workspace);
         int rc = proc.join();
 
         if (rc != 0) {
             // checkoutSucceeded = false;
             
+            logger.error("command exited with " + rc);
             listener.error("command exited with " + rc);
             // listener.error(baos.toString());
             listener.error("continuing anyway.  @todo: filter results from PVCS");
             
         } /* else */ { 
+            if (logger.isTraceEnabled()) {
+                logger.trace("pcli output:\n" + new String(baos.toByteArray()));
+            }
+            
             listener.getLogger().println("pcli output:");
             listener.getLogger().write(baos.toByteArray(), 0, baos.size());
 
@@ -240,10 +253,13 @@ public class PvcsScm extends SCM
                                final TaskListener listener)
         throws IOException, InterruptedException
     {
+        logger.debug("polling for changes in " + workspace);
+        
         // default to change being detected
         boolean changeDetected = true;
         
         if (project.getLastBuild() == null) {
+            logger.info("no existing build; starting a new one");
             listener.getLogger().println("no existing build; starting a new one");
         } else {
             PvcsChangeLogSet changeSet =
@@ -287,6 +303,7 @@ public class PvcsScm extends SCM
     {
         Calendar now = Calendar.getInstance();
         
+        logger.info("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
         listener.getLogger().println("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
 
         SimpleDateFormat df = new SimpleDateFormat(IN_DATE_FORMAT);
@@ -309,6 +326,8 @@ public class PvcsScm extends SCM
                               archiveRoot,
                               changeLogPrefixFudge,
                               lastBuild.getTime());
+
+        logger.debug("launching command " + cmd);
         
         Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], null, os);
 
@@ -321,6 +340,7 @@ public class PvcsScm extends SCM
         t.join();
 
         if (rc != 0) {
+            logger.error("command failed, returned " + rc);
             listener.error("command failed, returned " + rc);
         }
 
@@ -350,6 +370,8 @@ public class PvcsScm extends SCM
 
     public static final class DescriptorImpl extends SCMDescriptor<PvcsScm>
     {
+        private static final Log LOGGER = LogFactory.getLog(DescriptorImpl.class);
+        
 		public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
         private String executable = "pcli";
@@ -377,6 +399,8 @@ public class PvcsScm extends SCM
          */
         @Override
         public boolean configure(final StaplerRequest req) throws FormException {
+            LOGGER.debug("configuring from " + req);
+            
             executable = Util.fixEmpty(req.getParameter("pvcs.executable").trim());
             save();
             return true;

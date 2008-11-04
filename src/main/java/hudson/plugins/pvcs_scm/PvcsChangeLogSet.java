@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * >>INSERT CLASS OVERVIEW HERE<<
+ * Represents a set of changelog entries for a given build.
  *
  * @author Brian Lalor &lt;blalor@bravo5.org&gt;
  */

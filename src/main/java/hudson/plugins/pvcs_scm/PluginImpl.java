@@ -21,7 +21,11 @@ public class PluginImpl extends Plugin
      */
     @Override
     public void start() throws Exception {
-        SCMS.SCMS.add(PvcsScm.DescriptorImpl.DESCRIPTOR);
+        PvcsScm.DescriptorImpl desc = PvcsScm.DescriptorImpl.DESCRIPTOR;
+        
+        logger.debug("adding " + desc + " to SCMS");
+        
+        SCMS.SCMS.add(desc);
 
         super.start();
     }

@@ -21,7 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * >>INSERT CLASS OVERVIEW HERE<<
+ * Generates a changelog set from the output of <code>pcli vlog</code>.
  *
  * @author Brian Lalor &lt;blalor@bravo5.org&gt;
  */
@@ -111,11 +111,17 @@ public class PvcsLogReader implements Runnable
      * 
      */
     private void consumeLine(final String line) {
+        if (logger.isTraceEnabled()) {
+            logger.trace("line: " + line);
+        }
+        
         if (line.startsWith("Archive:")) {
             if ((modification != null) & (! waitingForNextValidStart)) {
                 // didn't find a valid entry before; delete this most recent
                 // one
 
+                logger.warn("discarding incomplete change log\n" + modification);
+                
                 changeLogSet.removeEntry(changeLogSet.sizeOfEntryArray() - 1);
             }
                     
@@ -205,6 +211,10 @@ public class PvcsLogReader implements Runnable
                 try {
                     modDate = outDateFormat.parse(lastMod);
                 } catch (ParseException e) {
+                    logger.debug(String.format("Unable to parse modification time %s with %s",
+                                              lastMod,
+                                              outDateFormat.toPattern()));
+                    
                     try {
                         modDate = outDateFormatSub.parse(lastMod);
                     } catch (ParseException pe) {

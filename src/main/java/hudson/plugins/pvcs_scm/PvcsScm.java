@@ -215,7 +215,7 @@ public class PvcsScm extends SCM
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        logger.debug("launching command " + cmd);
+        logger.debug("launching command " + cmd.toList());
         
         Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], baos, workspace);
         int rc = proc.join();
@@ -327,7 +327,7 @@ public class PvcsScm extends SCM
                               changeLogPrefixFudge,
                               lastBuild.getTime());
 
-        logger.debug("launching command " + cmd);
+        logger.debug("launching command " + cmd.toList());
         
         Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], null, os);
 

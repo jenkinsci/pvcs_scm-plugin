@@ -15,6 +15,7 @@
     <packaging>hpi</packaging>
 
     <name>PVCS SCM plugin for Hudson</name>
+    <url>http://to.do/</url>
 
     <dependencies>
         <dependency>
@@ -64,6 +65,18 @@
                 </executions>
 
                 <inherited>true</inherited>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties combine.children="append">
+                        <property>
+                            <name>java.util.logging.config.file</name>
+                            <value>${basedir}/src/test/resources/jdkLogger.properties</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
             </plugin>
         </plugins>
     </build>

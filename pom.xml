@@ -15,7 +15,10 @@
     <packaging>hpi</packaging>
 
     <name>PVCS SCM plugin for Hudson</name>
-    <url>http://to.do/</url>
+    <description>
+        Provides integration with PVCS for SCM operations in Hudson.
+    </description>
+    <url>http://hudson.gotdns.com/wiki/display/HUDSON/PVCS+SCM</url>
 
     <dependencies>
         <dependency>
@@ -107,4 +110,17 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <developers>
+        <developer>
+            <id>blalor</id>
+            <name>Brian Lalor</name>
+            <email>blalor@bravo5.org</email>
+            <roles>
+                <role>initiator</role>
+                <role>developer</role>
+            </roles>
+            <timezone>-5</timezone>
+        </developer>
+    </developers>
 </project>

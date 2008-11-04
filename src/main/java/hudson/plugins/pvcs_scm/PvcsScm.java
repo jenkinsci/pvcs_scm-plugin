@@ -1,8 +1,8 @@
 package hudson.plugins.pvcs_scm;
 
-import hudson.plugins.pvcsScm.changelog.ChangeLogDocument;
-import hudson.plugins.pvcsScm.changelog.PvcsChangeLogSet;
-import hudson.plugins.pvcsScm.changelog.PvcsChangeLogEntry;
+import hudson.plugins.pvcs_scm.changelog.ChangeLogDocument;
+import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogSet;
+import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogEntry;
 
 import hudson.Launcher;
 import hudson.Proc;

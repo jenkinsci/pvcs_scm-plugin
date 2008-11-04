@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xb:config xmlns:xb="http://xml.apache.org/xmlbeans/2004/02/xbean/config">
+
+    <!-- map nonamespace to fili.cote.eps.schema -->
+    <xb:namespace uri="urn:changelog.pvcs_scm.plugins.hudson">
+        <xb:package>hudson.plugins.pvcs_scm.changelog</xb:package>
+    </xb:namespace>
+</xb:config>

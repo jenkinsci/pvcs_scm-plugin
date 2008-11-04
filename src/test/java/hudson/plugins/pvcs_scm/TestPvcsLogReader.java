@@ -1,7 +1,7 @@
 package hudson.plugins.pvcs_scm;
 
 import java.util.Calendar;
-import hudson.plugins.pvcsScm.changelog.PvcsChangeLogSet;
+import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogSet;
 
 /**
  * Test cases for PvcsLogReader.

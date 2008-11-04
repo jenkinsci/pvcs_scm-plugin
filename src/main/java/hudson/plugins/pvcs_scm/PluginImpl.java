@@ -7,7 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * >>INSERT CLASS OVERVIEW HERE<<
+ * Concrete Plugin implementation for the PVCS SCM plugin.
  *
  * @author Brian Lalor &lt;blalor@bravo5.org&gt;
  */
@@ -21,10 +21,6 @@ public class PluginImpl extends Plugin
      */
     @Override
     public void start() throws Exception {
-        logger.fatal("starting up");
-        logger.info("descriptor.configPage: " + PvcsScm.DescriptorImpl.DESCRIPTOR.getConfigPage());
-        logger.info("descriptor.globalConfigPage: " + PvcsScm.DescriptorImpl.DESCRIPTOR.getGlobalConfigPage());
-        
         SCMS.SCMS.add(PvcsScm.DescriptorImpl.DESCRIPTOR);
 
         super.start();

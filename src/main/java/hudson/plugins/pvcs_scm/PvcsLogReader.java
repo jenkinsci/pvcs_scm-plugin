@@ -1,7 +1,7 @@
 package hudson.plugins.pvcs_scm;
 
-import hudson.plugins.pvcsScm.changelog.PvcsChangeLogSet;
-import hudson.plugins.pvcsScm.changelog.PvcsChangeLogEntry;
+import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogSet;
+import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogEntry;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

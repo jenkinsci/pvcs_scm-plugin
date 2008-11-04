@@ -25,7 +25,7 @@ public class TestPvcsChangeLogParser extends BaseTest
         EasyMock.replay(mockBuild);
         
         File changelogFile =
-            new File(getClass().getResource("/changelog.xml").getPath());
+            new File(getClass().getResource("changelog.xml").getPath());
         
         PvcsChangeLogSet changeSet = null;
         

@@ -18,7 +18,7 @@ public class TestPvcsLogReader extends BaseTest
         Calendar lastBuildCal = Calendar.getInstance();
         lastBuildCal.set(2008, Calendar.SEPTEMBER, 1);
         
-        PvcsLogReader reader = new PvcsLogReader(getClass().getResourceAsStream("/testPvcsLog.log"),
+        PvcsLogReader reader = new PvcsLogReader(getClass().getResourceAsStream("testPvcsLog.log"),
                                                  "//repository/pvcs/repository/MYORG_MAINT",
                                                  "2008_10/",
                                                  lastBuildCal.getTime());
@@ -40,7 +40,7 @@ public class TestPvcsLogReader extends BaseTest
         Calendar lastBuildCal = Calendar.getInstance();
         lastBuildCal.set(2008, Calendar.SEPTEMBER, 1);
         
-        PvcsLogReader reader = new PvcsLogReader(getClass().getResourceAsStream("/testPvcsLog_bad_record.log"),
+        PvcsLogReader reader = new PvcsLogReader(getClass().getResourceAsStream("testPvcsLog_bad_record.log"),
                                                  "//repository/pvcs/repository/MYORG_MAINT",
                                                  "2008_10/",
                                                  lastBuildCal.getTime());
@@ -60,7 +60,7 @@ public class TestPvcsLogReader extends BaseTest
         Calendar lastBuildCal = Calendar.getInstance();
         lastBuildCal.set(2008, Calendar.OCTOBER, 16);
         
-        PvcsLogReader reader = new PvcsLogReader(getClass().getResourceAsStream("/testPvcsLog3.log"),
+        PvcsLogReader reader = new PvcsLogReader(getClass().getResourceAsStream("testPvcsLog3.log"),
                                                  "//repository/pvcs/repository/MYORG_MAINT",
                                                  "2008_10/",
                                                  lastBuildCal.getTime());

@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     
@@ -12,13 +10,14 @@
     </parent>
 
     <artifactId>pvcs_scm</artifactId>
+    <version>1.0</version>
     <packaging>hpi</packaging>
 
     <name>PVCS SCM plugin for Hudson</name>
+    <url>http://hudson.gotdns.com/wiki/display/HUDSON/PVCS+SCM</url>
     <description>
         Provides integration with PVCS for SCM operations in Hudson.
     </description>
-    <url>http://hudson.gotdns.com/wiki/display/HUDSON/PVCS+SCM</url>
 
     <dependencies>
         <dependency>
@@ -30,12 +29,6 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymockclassextension</artifactId>
-            <version>2.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
             <version>2.3</version>
             <scope>test</scope>
         </dependency>
@@ -74,6 +67,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemProperties combine.children="append">
+                        <!-- configures the JDK logger for tests -->
                         <property>
                             <name>java.util.logging.config.file</name>
                             <value>${basedir}/src/test/resources/jdkLogger.properties</value>
@@ -106,6 +100,10 @@
                             <exclude>hudson/plugins/pvcs_scm/changelog/**</exclude>
                         </excludes>
                     </instrumentation>
+                    <formats>
+                        <format>xml</format>
+                        <format>html</format>
+                    </formats>
                 </configuration>
             </plugin>
         </plugins>
@@ -123,4 +121,10 @@
             <timezone>-5</timezone>
         </developer>
     </developers>
+
+  <scm>
+    <connection>scm:svn:https://guest@svn.dev.java.net/svn/hudson/tags/pvcs_scm-1.0</connection>
+    <developerConnection>scm:svn:https://svn.dev.java.net/svn/hudson/tags/pvcs_scm-1.0</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/hudson/plugins/pvcs_scm/tags/pvcs_scm-1.0</url>
+  </scm>
 </project>

@@ -12,13 +12,14 @@
     </parent>
 
     <artifactId>pvcs_scm</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
     <name>PVCS SCM plugin for Hudson</name>
+    <url>http://hudson.gotdns.com/wiki/display/HUDSON/PVCS+SCM</url>
     <description>
         Provides integration with PVCS for SCM operations in Hudson.
     </description>
-    <url>http://hudson.gotdns.com/wiki/display/HUDSON/PVCS+SCM</url>
 
     <dependencies>
         <dependency>
@@ -30,12 +31,6 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymockclassextension</artifactId>
-            <version>2.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
             <version>2.3</version>
             <scope>test</scope>
         </dependency>
@@ -74,6 +69,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemProperties combine.children="append">
+                        <!-- configures the JDK logger for tests -->
                         <property>
                             <name>java.util.logging.config.file</name>
                             <value>${basedir}/src/test/resources/jdkLogger.properties</value>
@@ -106,6 +102,10 @@
                             <exclude>hudson/plugins/pvcs_scm/changelog/**</exclude>
                         </excludes>
                     </instrumentation>
+                    <formats>
+                        <format>xml</format>
+                        <format>html</format>
+                    </formats>
                 </configuration>
             </plugin>
         </plugins>

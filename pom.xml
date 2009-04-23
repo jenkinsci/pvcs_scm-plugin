@@ -14,7 +14,7 @@
     <packaging>hpi</packaging>
 
     <name>PVCS SCM plugin for Hudson</name>
-    <url>http://hudson.gotdns.com/wiki/display/HUDSON/PVCS+SCM</url>
+    <url>http://wiki.hudson-ci.org/display/HUDSON/PVCS+SCM</url>
     <description>
         Provides integration with PVCS for SCM operations in Hudson.
     </description>

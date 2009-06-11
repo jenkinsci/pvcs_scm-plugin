@@ -16,11 +16,24 @@
     <f:entry title="Changelog prefix fudge" help="/plugin/pvcs/changelog_prefix_fudge.html">
         <f:textbox name="pvcs.changeLogPrefixFudge" value="${scm.changeLogPrefixFudge}" />
     </f:entry>
-    
-    <f:entry title="Module" help="/plugin/pvcs/module.html">
+
+    <f:entry title="Modules" help="/plugin/pvcs/changelog_prefix_fudge.html">
         <f:textbox name="pvcs.moduleDir" value="${scm.moduleDir}" />
+        Multiple modules can be input seperated by semi colon
     </f:entry>
-    
+
+    <f:entry title="LoginId" help="/plugin/pvcs/loginid.html">
+        <f:textbox name="pvcs.loginId" value="${scm.loginId}" />
+    </f:entry>
+    <f:entry title="Pvcs Workspace" help="/plugin/pvcs/pvcsworkspace.html">
+        <f:textbox name="pvcs.pvcsWorkspace" value="${scm.pvcsWorkspace}" />
+    </f:entry>
+    <f:entry title="Promotion Group" help="/plugin/pvcs/promotiongroup.html">
+        <f:textbox name="pvcs.promotionGroup" value="${scm.promotionGroup}" />
+    </f:entry>
+    <f:entry title="Version Label" help="/plugin/pvcs/versionlabel.html">
+        <f:textbox name="pvcs.versionLabel" value="${scm.versionLabel}" />
+    </f:entry>
     <f:advanced>
         <f:entry title="Clean copy">
             <f:checkbox name="pvcs.cleanCopy" checked="${scm.cleanCopy}" />

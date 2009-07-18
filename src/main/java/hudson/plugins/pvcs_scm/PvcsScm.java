@@ -93,18 +93,12 @@ public class PvcsScm extends SCM
         this.projectRoot = projectRoot;
         this.archiveRoot = archiveRoot;
         this.changeLogPrefixFudge = changeLogPrefixFudge;
-      //  this.MAX = 5;
         this.moduleDir= moduleDir;
         this.loginId = loginId;
         this.pvcsWorkspace = pvcsWorkspace;
         this.promotionGroup = promotionGroup;
         this.versionLabel = versionLabel;
         this.cleanCopy = cleanCopy;
-       // for(int i=0;i<moduleDir.length;i++ )
-        //{
-          //  this.moduleDir[i]=moduleDir[i];
-           // logger.debug(this.moduleDir[i]);
-        //}
         logger.debug("created new instance");
     }
     // }}}
@@ -268,65 +262,8 @@ public class PvcsScm extends SCM
             
             workspace.deleteContents();
         }
-        String delimiter=";";
-        String[] tempModuleDir= moduleDir.split(delimiter);
         
-        if(tempModuleDir.length >0 )
-        {
-            for(int i=0;i<tempModuleDir.length;i++){
-                logger.debug("Inside for loop"+ tempModuleDir[i]);
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-
-        cmd.add(getDescriptor().getExecutable());
-        cmd.add("-nb", "run", "-ns", "-y");
-        cmd.add("get");
-        cmd.add("-pr" + projectRoot);
-        if (loginId != null && !loginId.trim().equals("")) {
-            cmd.add("-id" + loginId);
-        }
-        if (pvcsWorkspace != null && !pvcsWorkspace.trim().equals("")) {
-            cmd.add("-sp" + pvcsWorkspace);
-        }
-        if (versionLabel != null && !versionLabel.trim().equals("")) {
-            cmd.add("-v" + versionLabel);
-        }else if (promotionGroup != null && !promotionGroup.trim().equals("")) {
-            cmd.add("-g" + promotionGroup);
-        }
         
-        cmd.add("-bp/");
-        cmd.add("-o");
-        cmd.add("-a.");
-        cmd.add("-z");
-        cmd.add(tempModuleDir[i]);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        logger.debug("launching command " + cmd.toList());
-        
-        Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], baos, workspace);
-        int rc = proc.join();
-
-        if (rc != 0) {
-            // checkoutSucceeded = false;
-            
-            logger.error("command exited with " + rc);
-            listener.error("command exited with " + rc);
-            // listener.error(baos.toString());
-            listener.error("continuing anyway.  @todo: filter results from PVCS");
-            
-        } /* else */ { 
-            if (logger.isTraceEnabled()) {
-                logger.trace("pcli output:\n" + new String(baos.toByteArray()));
-            }
-            
-            listener.getLogger().println("pcli output:");
-            listener.getLogger().write(baos.toByteArray(), 0, baos.size());
-
-        }
-        }
-        }
-        else
-        {
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(getDescriptor().getExecutable());
         cmd.add("-nb", "run", "-ns", "-y");
@@ -375,7 +312,7 @@ public class PvcsScm extends SCM
 
         }
        
-    }
+    
          return checkoutSucceeded;
     }
     // }}}
@@ -445,8 +382,7 @@ public class PvcsScm extends SCM
         listener.getLogger().println("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
 
         SimpleDateFormat df = new SimpleDateFormat(IN_DATE_FORMAT);
-        String delimiter=";";
-        String[] tempModuleDir= moduleDir.split(delimiter);
+        
         PipedOutputStream os = new PipedOutputStream();
 
         PvcsLogReader logReader =
@@ -455,56 +391,7 @@ public class PvcsScm extends SCM
                               changeLogPrefixFudge,
                               lastBuild.getTime());
         
-        if(tempModuleDir.length >0 )
-        {
-            for(int i=0;i<tempModuleDir.length;i++)
-                {
-                logger.debug("Inside for loop"+ tempModuleDir[i]);
-
-
-        ArgumentListBuilder cmd = new ArgumentListBuilder();
-        cmd.add(getDescriptor().getExecutable());
-        cmd.add("-nb", "run", "-ns", "-q");
-        cmd.add("vlog");
-        cmd.add("-pr" + projectRoot);
-        if (loginId != null && !loginId.trim().equals("")) {
-            cmd.add("-id" + loginId);
-        }
-        if (pvcsWorkspace != null && !pvcsWorkspace.trim().equals("")) {
-            cmd.add("-sp" + pvcsWorkspace);
-        }
-        if (versionLabel != null && !versionLabel.trim().equals("")) {
-            cmd.add("-v" + versionLabel);
-        }
-        if (promotionGroup != null && !promotionGroup.trim().equals("")) {
-            cmd.add("-g" + promotionGroup);
-        }
-        cmd.add("-i");
-        cmd.add("-ds" + df.format(lastBuild.getTime()));
-        cmd.add("-de" + df.format(now.getTime()));
-        cmd.add("-z");
-        cmd.add(tempModuleDir[i]);
-
-
-
-        logger.debug("launching command " + cmd.toList());
-
-        Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], null, os);
-
-        Thread t = new Thread(logReader);
-        t.start();
-
-        int rc = proc.join();
-        os.close();
-
-        t.join();
-
-        if (rc != 0) {
-            logger.error("command failed, returned " + rc);
-            listener.error("command failed, returned " + rc);
-        }
-            }
-        }else{
+        
         ArgumentListBuilder cmd = new ArgumentListBuilder();
         cmd.add(getDescriptor().getExecutable());
         cmd.add("-nb", "run", "-ns", "-q");
@@ -546,7 +433,7 @@ public class PvcsScm extends SCM
             logger.error("command failed, returned " + rc);
             listener.error("command failed, returned " + rc);
         }
-        }
+        
 
 
         return logReader.getChangeLogSet();

@@ -19,7 +19,6 @@
 
     <f:entry title="Modules" help="/plugin/pvcs/changelog_prefix_fudge.html">
         <f:textbox name="pvcs.moduleDir" value="${scm.moduleDir}" />
-        Multiple modules can be input seperated by semi colon
     </f:entry>
 
     <f:entry title="LoginId" help="/plugin/pvcs/loginid.html">

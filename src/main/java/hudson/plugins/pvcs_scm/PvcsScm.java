@@ -1,5 +1,6 @@
 package hudson.plugins.pvcs_scm;
 
+import hudson.Extension;
 import hudson.plugins.pvcs_scm.changelog.ChangeLogDocument;
 import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogSet;
 import hudson.plugins.pvcs_scm.changelog.PvcsChangeLogEntry;
@@ -15,32 +16,29 @@ import hudson.model.BuildListener;
 import hudson.model.TaskListener;
 import hudson.model.Run;
 
-import hudson.scm.ChangeLogParser;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
 
 import hudson.util.ArgumentListBuilder;
-import hudson.util.FormFieldValidator;
+import hudson.util.FormValidation;
 
 import java.io.File;
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.io.PipedOutputStream;
 import java.io.PipedInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import javax.servlet.ServletException;
 
+import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.kohsuke.stapler.QueryParameter;
 
 /**
  * Provides integration with PCVS.
@@ -291,8 +289,7 @@ public class PvcsScm extends SCM
 
         logger.debug("launching command " + cmd.toList());
 
-        Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], baos, workspace);
-        int rc = proc.join();
+        int rc = launcher.launch().cmds(cmd).stdout(baos).pwd(workspace).join();
 
         if (rc != 0) {
             // checkoutSucceeded = false;
@@ -419,7 +416,7 @@ public class PvcsScm extends SCM
 
         logger.debug("launching command " + cmd.toList());
 
-        Proc proc = launcher.launch(cmd.toCommandArray(), new String[0], null, os);
+        Proc proc = launcher.launch().cmds(cmd).stdout(os).start();
 
         Thread t = new Thread(logReader);
         t.start();
@@ -464,7 +461,8 @@ public class PvcsScm extends SCM
     {
         private static final Log LOGGER = LogFactory.getLog(DescriptorImpl.class);
 
-		public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
+        @Extension
+        public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
         private String executable = "pcli";
 
@@ -490,7 +488,7 @@ public class PvcsScm extends SCM
          *
          */
         @Override
-        public boolean configure(final StaplerRequest req) throws FormException {
+        public boolean configure(final StaplerRequest req, JSONObject formData) throws FormException {
             LOGGER.debug("configuring from " + req);
 
             executable = Util.fixEmpty(req.getParameter("pvcs.executable").trim());
@@ -509,12 +507,9 @@ public class PvcsScm extends SCM
         /**
          *
          */
-        public void doExecutableCheck(final StaplerRequest req,
-                                      final StaplerResponse resp)
-            throws IOException, ServletException
-            {
-                new FormFieldValidator.Executable(req, resp).process();
-            }
+        public FormValidation doExecutableCheck(@QueryParameter String value) {
+            return FormValidation.validateExecutable(value);
+        }
         // }}}
     }
 }

@@ -7,11 +7,11 @@
 
     <f:section title="PVCS">
         <f:entry title="PVCS command line executable (pcli)" 
-                 help="/plugin/pvcs/executable.html">
+                 help="/plugin/pvcs_scm/executable.html">
 
             <f:textbox name="pvcs.executable"
                        value="${descriptor.executable}"
-                       checkUrl="'${rootURL}/scm/PvcsScm/executableCheck?value='+escape(this.value)" />
+                       checkUrl="'${rootURL}/scm/PvcsScm/executableCheck?value='+encodeURIComponent(this.value)" />
         </f:entry>
     </f:section>
 </j:jelly>

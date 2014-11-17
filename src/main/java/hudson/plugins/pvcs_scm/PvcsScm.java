@@ -216,7 +216,7 @@ public class PvcsScm extends SCM
      */
     @Override
     public boolean requiresWorkspaceForPolling() {
-        return false;
+        return true;
     }
     // }}}
     

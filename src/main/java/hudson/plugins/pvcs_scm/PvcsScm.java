@@ -511,16 +511,5 @@ public class PvcsScm extends SCM
             return FormValidation.validateExecutable(value);
         }
         // }}}
-        
-        public PollingResult compareRemoteRevisionWith(Job<?,?> project,
-                                      Launcher launcher,
-                                      FilePath workspace,
-                                      TaskListener listener,
-                                      SCMRevisionState baseline)
-                                        throws IOException,
-                                               InterruptedException {
-                                                   //TODO, required by change to jenkins plugin 1.424 to be compilable with Java 7...
-                                                   return null;
-                                               }
     }
 }

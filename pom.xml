@@ -2,17 +2,17 @@
 
     <modelVersion>4.0.0</modelVersion>
     
-    <!-- <parent>
+    <parent>
         <groupId>org.jvnet.hudson.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.324</version>
+        <version>1.424</version>
         <relativePath>../pom.xml</relativePath>
-    </parent> -->
-    <parent>
+    </parent>
+    <!-- <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
         <version>1.424</version>
-    </parent>
+    </parent> -->
 
     <artifactId>pvcs_scm</artifactId>
     <version>1.2-SNAPSHOT</version>

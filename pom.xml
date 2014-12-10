@@ -2,11 +2,16 @@
 
     <modelVersion>4.0.0</modelVersion>
     
-    <parent>
+    <!-- <parent>
         <groupId>org.jvnet.hudson.plugins</groupId>
         <artifactId>plugin</artifactId>
         <version>1.324</version>
         <relativePath>../pom.xml</relativePath>
+    </parent> -->
+    <parent>
+        <groupId>org.jenkins-ci.plugins</groupId>
+        <artifactId>plugin</artifactId>
+        <version>1.424</version>
     </parent>
 
     <artifactId>pvcs_scm</artifactId>
@@ -73,15 +78,6 @@
                             <value>${basedir}/src/test/resources/jdkLogger.properties</value>
                         </property>
                     </systemProperties>
-                </configuration>
-            </plugin>
-            
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
                 </configuration>
             </plugin>
 

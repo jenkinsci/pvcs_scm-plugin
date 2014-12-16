@@ -13,6 +13,15 @@
                        value="${descriptor.executable}"
                        checkUrl="'${rootURL}/scm/PvcsScm/executableCheck?value='+encodeURIComponent(this.value)" />
         </f:entry>
+
+        <f:entry title="Date format for local Jenkins user" 
+                 help="/plugin/pvcs_scm/inputdateformat.html">
+
+            <f:textbox name="pvcs.inputdateformat"
+                       value="${descriptor.inputdateformat}" />
+
+        </f:entry>
+
     </f:section>
 </j:jelly>
 

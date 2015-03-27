@@ -259,6 +259,7 @@ public class PvcsScm extends SCM
         cmd.add("-nb", "run", "-ns", "-y");
         cmd.add("get");
         cmd.add("-pr" + projectRoot);
+        cmd.add("-qe");
         if (loginId != null && !loginId.trim().equals("")) {
             cmd.add("-id" + loginId);
         }

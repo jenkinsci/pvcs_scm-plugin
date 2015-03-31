@@ -290,7 +290,8 @@ public class PvcsScm extends SCM
             logger.error("command exited with " + rc);
             listener.error("command exited with " + rc);
             // listener.error(baos.toString());
-            listener.error("continuing anyway.  @todo: filter results from PVCS");
+            // listener.error("continuing anyway.  @todo: filter results from PVCS");
+            build.setResult(Result.UNSTABLE);
 
         } /* else */ {
             if (logger.isTraceEnabled()) {

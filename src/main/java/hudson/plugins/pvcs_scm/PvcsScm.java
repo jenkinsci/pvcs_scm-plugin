@@ -291,7 +291,24 @@ public class PvcsScm extends SCM
             listener.error("command exited with " + rc);
             // listener.error(baos.toString());
             // listener.error("continuing anyway.  @todo: filter results from PVCS");
-            build.setResult(Result.UNSTABLE);
+		byte[] in = baos.toByteArray();
+		InputStream is = new ByteArrayInputStream(in);
+        	BufferedReader bfReader = new BufferedReader(new InputStreamReader(is));
+		String line = "";
+		while ((line = bfReader.readLine()) != null) {
+			if (line.startsWith("Error")) {
+				listener.error(line);
+				if (line.indexOf("The revision library path for") != -1) {
+					build.setResult(Result.UNSTABLE);
+				}
+				if (line.indexOf("Could not find a revision") != -1) {
+					build.setResult(Result.UNSTABLE);				
+				}
+				else {
+					checkoutSucceeded = false;
+				}
+			}
+		}
 
         } /* else */ {
             if (logger.isTraceEnabled()) {

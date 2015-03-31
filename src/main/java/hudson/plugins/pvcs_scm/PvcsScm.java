@@ -14,6 +14,7 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.TaskListener;
+import hudson.model.Result;
 import hudson.model.Run;
 
 import hudson.scm.PollingResult;

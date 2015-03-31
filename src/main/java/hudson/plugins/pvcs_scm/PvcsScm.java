@@ -14,10 +14,13 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.model.TaskListener;
+import hudson.model.Result;
 import hudson.model.Run;
 
+import hudson.scm.PollingResult;
 import hudson.scm.SCM;
 import hudson.scm.SCMDescriptor;
+import hudson.scm.SCMRevisionState;
 
 import hudson.util.ArgumentListBuilder;
 import hudson.util.FormValidation;
@@ -27,6 +30,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.PipedOutputStream;
 import java.io.PipedInputStream;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
@@ -48,16 +55,6 @@ import org.kohsuke.stapler.QueryParameter;
 public class PvcsScm extends SCM
 {
     private final Log logger = LogFactory.getLog(getClass());
-
-    /**
-     * Date format required by commands passed to PVCS
-     */
-    private static final String IN_DATE_FORMAT = "MM/dd/yyyy hh:mm:ss aa";
-
-    /**
-     * Date format returned in the output of PVCS commands.
-     */
-    private static final String OUT_DATE_FORMAT = "MMM dd yyyy HH:mm:ss";
 
     private String projectRoot;
     private String archiveRoot;
@@ -216,7 +213,7 @@ public class PvcsScm extends SCM
      */
     @Override
     public boolean requiresWorkspaceForPolling() {
-        return false;
+        return true;
     }
     // }}}
     
@@ -225,7 +222,7 @@ public class PvcsScm extends SCM
      * {@inheritDoc}
      */
     @Override
-    public boolean checkout(final AbstractBuild build,
+    public boolean checkout(final AbstractBuild<?,?> build,
                             final Launcher launcher,
                             final FilePath workspace,
                             final BuildListener listener,
@@ -267,6 +264,7 @@ public class PvcsScm extends SCM
         cmd.add("-nb", "run", "-ns", "-y");
         cmd.add("get");
         cmd.add("-pr" + projectRoot);
+        cmd.add("-qe");
         if (loginId != null && !loginId.trim().equals("")) {
             cmd.add("-id" + loginId);
         }
@@ -297,7 +295,25 @@ public class PvcsScm extends SCM
             logger.error("command exited with " + rc);
             listener.error("command exited with " + rc);
             // listener.error(baos.toString());
-            listener.error("continuing anyway.  @todo: filter results from PVCS");
+            // listener.error("continuing anyway.  @todo: filter results from PVCS");
+		byte[] in = baos.toByteArray();
+		InputStream is = new ByteArrayInputStream(in);
+        	BufferedReader bfReader = new BufferedReader(new InputStreamReader(is));
+		String line = "";
+		while ((line = bfReader.readLine()) != null) {
+			if (line.startsWith("Error")) {
+				listener.error(line);
+				if (line.indexOf("The revision library path for") != -1) {
+					build.setResult(Result.UNSTABLE);
+				}
+				if (line.indexOf("Could not find a revision") != -1) {
+					build.setResult(Result.UNSTABLE);				
+				}
+				else {
+					checkoutSucceeded = false;
+				}
+			}
+		}
 
         } /* else */ {
             if (logger.isTraceEnabled()) {
@@ -378,7 +394,7 @@ public class PvcsScm extends SCM
         logger.info("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
         listener.getLogger().println("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
 
-        SimpleDateFormat df = new SimpleDateFormat(IN_DATE_FORMAT);
+        SimpleDateFormat df = new SimpleDateFormat(getDescriptor().inputdateformat);
         
         PipedOutputStream os = new PipedOutputStream();
 
@@ -465,6 +481,7 @@ public class PvcsScm extends SCM
         public static final DescriptorImpl DESCRIPTOR = new DescriptorImpl();
 
         private String executable = "pcli";
+        private String inputdateformat = "MM/dd/yyyy hh:mm:ss";
 
         // {{{ constructor
         private DescriptorImpl() {
@@ -492,6 +509,7 @@ public class PvcsScm extends SCM
             LOGGER.debug("configuring from " + req);
 
             executable = Util.fixEmpty(req.getParameter("pvcs.executable").trim());
+            inputdateformat = Util.fixEmpty(req.getParameter("pvcs.inputdateformat").trim());
             save();
             return true;
         }
@@ -511,5 +529,31 @@ public class PvcsScm extends SCM
             return FormValidation.validateExecutable(value);
         }
         // }}}
+        
+        
+        // {{{ getInputdateformat
+        public String getInputdateformat() {
+            return inputdateformat;
+        }
+        // }}}
+
     }
+
+	@Override
+	public SCMRevisionState calcRevisionsFromBuild(AbstractBuild<?, ?> build,
+			Launcher launcher, TaskListener listener) throws IOException,
+			InterruptedException {
+		//intentionally empty.
+		return null;
+	}
+
+	@Override
+	protected PollingResult compareRemoteRevisionWith(
+			AbstractProject<?, ?> project, Launcher launcher,
+			FilePath workspace, TaskListener listener, SCMRevisionState baseline)
+			throws IOException, InterruptedException {
+		final Launcher localLauncher = launcher != null ? launcher : new Launcher.LocalLauncher(listener);
+		boolean shouldBuild = pollChanges(project, localLauncher, workspace, listener);
+		return shouldBuild ? PollingResult.BUILD_NOW : PollingResult.NO_CHANGES;
+	}
 }

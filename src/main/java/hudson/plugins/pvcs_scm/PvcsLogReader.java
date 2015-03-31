@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 import java.text.SimpleDateFormat;
@@ -31,8 +32,8 @@ public class PvcsLogReader implements Runnable
     
     private final String lineSep = System.getProperty("line.separator");
 
-    private final SimpleDateFormat outDateFormat = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
-    private final SimpleDateFormat outDateFormatSub = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+    private final SimpleDateFormat outDateFormat = new SimpleDateFormat("MMM dd yyyy HH:mm:ss", Locale.ENGLISH);
+    private final SimpleDateFormat outDateFormatSub = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.ENGLISH);
 
     /** Reader to read from. */
     private BufferedReader reader;

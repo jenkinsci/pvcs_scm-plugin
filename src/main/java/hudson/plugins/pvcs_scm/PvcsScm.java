@@ -47,7 +47,7 @@ import org.kohsuke.stapler.QueryParameter;
  */
 public class PvcsScm extends SCM
 {
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Log logger = LogFactory.getLog(PvcsScm.class);
 
     /**
      * Date format required by commands passed to PVCS

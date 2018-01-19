@@ -212,7 +212,7 @@ public class PvcsScm extends SCM
 
     // {{{ requiresWorkspaceForPolling
     /**
-     * @todo
+     * TODO
      */
     @Override
     public boolean requiresWorkspaceForPolling() {

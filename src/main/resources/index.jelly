@@ -1,3 +1,4 @@
+<?jelly escape-by-default='true'?>
 <div>
   This plugin provides integration with Serena's PVCS Version Manager SCM.
 </div>

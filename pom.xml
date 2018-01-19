@@ -3,21 +3,27 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>org.jvnet.hudson.plugins</groupId>
+        <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>1.324</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>2.30</version>
+        <relativePath />
     </parent>
 
     <artifactId>pvcs_scm</artifactId>
     <version>1.2-SNAPSHOT</version>
     <packaging>hpi</packaging>
 
-    <name>PVCS SCM plugin for Hudson</name>
-    <url>http://wiki.hudson-ci.org/display/HUDSON/PVCS+SCM</url>
+    <name>PVCS SCM plugin</name>
+    <url>https://wiki.jenkins.io/display/JENKINS/PVCS+SCM</url>
     <description>
         Provides integration with PVCS for SCM operations in Hudson.
     </description>
+
+    <properties>
+        <jenkins.version>1.580.1</jenkins.version>
+        <java.level>6</java.level>
+        <findbugs.failOnError>false</findbugs.failOnError> <!-- TODO fix six warnings -->
+    </properties>
 
     <dependencies>
         <dependency>
@@ -78,37 +84,6 @@
         </plugins>
     </build>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <configuration>
-                    <links>
-                        <link>https://hudson.dev.java.net/nonav/javadoc/</link>
-                        <link>https://stapler.dev.java.net/nonav/javadoc/</link>
-                    </links>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <configuration>
-                    <instrumentation>
-                        <excludes>
-                            <exclude>schemaorg_apache_xmlbeans/**</exclude>
-                            <exclude>hudson/plugins/pvcs_scm/changelog/**</exclude>
-                        </excludes>
-                    </instrumentation>
-                    <formats>
-                        <format>xml</format>
-                        <format>html</format>
-                    </formats>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <developers>
         <developer>
             <id>blalor</id>
@@ -125,14 +100,14 @@
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
-            <url>http://repo.jenkins-ci.org/public/</url>
+            <url>https://repo.jenkins-ci.org/public/</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
             <id>repo.jenkins-ci.org</id>
-            <url>http://repo.jenkins-ci.org/public/</url>
+            <url>https://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
     </pluginRepositories>
 </project>  

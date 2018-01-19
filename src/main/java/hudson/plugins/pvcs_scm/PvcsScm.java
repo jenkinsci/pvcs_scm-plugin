@@ -47,7 +47,7 @@ import org.kohsuke.stapler.QueryParameter;
  */
 public class PvcsScm extends SCM
 {
-    private static final Log logger = LogFactory.getLog(PvcsScm.class);
+    private static final Log LOGGER = LogFactory.getLog(PvcsScm.class);
 
     /**
      * Date format required by commands passed to PVCS
@@ -97,7 +97,7 @@ public class PvcsScm extends SCM
         this.promotionGroup = promotionGroup;
         this.versionLabel = versionLabel;
         this.cleanCopy = cleanCopy;
-        logger.debug("created new instance");
+        LOGGER.debug("created new instance");
     }
     // }}}
 
@@ -232,7 +232,7 @@ public class PvcsScm extends SCM
                             final File changelogFile)
         throws IOException, InterruptedException
     {
-        logger.trace("in checkout()");
+        LOGGER.trace("in checkout()");
         
         boolean checkoutSucceeded = true;
 
@@ -256,7 +256,7 @@ public class PvcsScm extends SCM
         if (cleanCopy) {
             listener.getLogger().println("clean copy configured; deleting contents of " + workspace);
 
-            logger.info("deleting contents of workspace " + workspace);
+            LOGGER.info("deleting contents of workspace " + workspace);
             
             workspace.deleteContents();
         }
@@ -287,21 +287,21 @@ public class PvcsScm extends SCM
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        logger.debug("launching command " + cmd.toList());
+        LOGGER.debug("launching command " + cmd.toList());
 
         int rc = launcher.launch().cmds(cmd).stdout(baos).pwd(workspace).join();
 
         if (rc != 0) {
             // checkoutSucceeded = false;
 
-            logger.error("command exited with " + rc);
+            LOGGER.error("command exited with " + rc);
             listener.error("command exited with " + rc);
             // listener.error(baos.toString());
             listener.error("continuing anyway.  @todo: filter results from PVCS");
 
         } /* else */ {
-            if (logger.isTraceEnabled()) {
-                logger.trace("pcli output:\n" + new String(baos.toByteArray()));
+            if (LOGGER.isTraceEnabled()) {
+                LOGGER.trace("pcli output:\n" + new String(baos.toByteArray()));
             }
 
             listener.getLogger().println("pcli output:");
@@ -325,13 +325,13 @@ public class PvcsScm extends SCM
                                final TaskListener listener)
         throws IOException, InterruptedException
     {
-        logger.debug("polling for changes in " + workspace);
+        LOGGER.debug("polling for changes in " + workspace);
         
         // default to change being detected
         boolean changeDetected = true;
         
         if (project.getLastBuild() == null) {
-            logger.info("no existing build; starting a new one");
+            LOGGER.info("no existing build; starting a new one");
             listener.getLogger().println("no existing build; starting a new one");
         } else {
             PvcsChangeLogSet changeSet =
@@ -375,7 +375,7 @@ public class PvcsScm extends SCM
     {
         Calendar now = Calendar.getInstance();
 
-        logger.info("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
+        LOGGER.info("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
         listener.getLogger().println("looking for changes between " + lastBuild.getTime() + " and " + now.getTime());
 
         SimpleDateFormat df = new SimpleDateFormat(IN_DATE_FORMAT);
@@ -414,7 +414,7 @@ public class PvcsScm extends SCM
 
 
 
-        logger.debug("launching command " + cmd.toList());
+        LOGGER.debug("launching command " + cmd.toList());
 
         Proc proc = launcher.launch().cmds(cmd).stdout(os).start();
 
@@ -427,7 +427,7 @@ public class PvcsScm extends SCM
         t.join();
 
         if (rc != 0) {
-            logger.error("command failed, returned " + rc);
+            LOGGER.error("command failed, returned " + rc);
             listener.error("command failed, returned " + rc);
         }
         

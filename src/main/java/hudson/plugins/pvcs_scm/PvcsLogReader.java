@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PvcsLogReader implements Runnable
 {
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Log LOGGER = LogFactory.getLog(PvcsLogReader.class);
     
     private final String lineSep = System.getProperty("line.separator");
 
@@ -111,8 +111,8 @@ public class PvcsLogReader implements Runnable
      * 
      */
     private void consumeLine(final String line) {
-        if (logger.isTraceEnabled()) {
-            logger.trace("line: " + line);
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("line: " + line);
         }
         
         if (line.startsWith("Archive:")) {
@@ -120,7 +120,7 @@ public class PvcsLogReader implements Runnable
                 // didn't find a valid entry before; delete this most recent
                 // one
 
-                logger.warn("discarding incomplete change log\n" + modification);
+                LOGGER.warn("discarding incomplete change log\n" + modification);
                 
                 changeLogSet.removeEntry(changeLogSet.sizeOfEntryArray() - 1);
             }
@@ -211,14 +211,14 @@ public class PvcsLogReader implements Runnable
                 try {
                     modDate = outDateFormat.parse(lastMod);
                 } catch (ParseException e) {
-                    logger.debug(String.format("Unable to parse modification time %s with %s",
+                    LOGGER.debug(String.format("Unable to parse modification time %s with %s",
                                               lastMod,
                                               outDateFormat.toPattern()));
                     
                     try {
                         modDate = outDateFormatSub.parse(lastMod);
                     } catch (ParseException pe) {
-                        logger.error("Error parsing modification time " + lastMod + ": ", e);
+                        LOGGER.error("Error parsing modification time " + lastMod + ": ", e);
                     }
                 }
 

@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PvcsChangeLogParser extends ChangeLogParser
 {
-    private Log logger = LogFactory.getLog(getClass());
+    private static final Log LOGGER = LogFactory.getLog(PvcsChangeLogParser.class);
     
     // {{{ parse
     /**
@@ -38,7 +38,7 @@ public class PvcsChangeLogParser extends ChangeLogParser
         PvcsChangeLogSet clSet = null;
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         
-        logger.debug("parsing " + changelogFile);
+        LOGGER.debug("parsing " + changelogFile);
         
         try {
             ChangeLogDocument doc = ChangeLogDocument.Factory.parse(changelogFile);
@@ -58,7 +58,7 @@ public class PvcsChangeLogParser extends ChangeLogParser
             }
         } catch (XmlException e) {
             // @todo
-            logger.error(String.format("Unable to parse %s: %s", changelogFile, e.getMessage()), e);
+            LOGGER.error(String.format("Unable to parse %s: %s", changelogFile, e.getMessage()), e);
             throw new SAXException(e);
         }
     
